@@ -4,6 +4,7 @@ use std::path::{Path, PathBuf};
 use std::time::Instant;
 use std::process;
 use std::sync::mpsc;
+use std::thread;
 
 use anyhow::{Context, Result};
 use clap::{Parser, Subcommand};
@@ -106,6 +107,7 @@ fn run() -> Result<(), anyhow::Error> {
             let app = ZipToolApp::default();
             let native_options = eframe::NativeOptions {
                 initial_window_size: Some(egui::vec2(600.0, 500.0)),
+                icon_data: load_icon_data(),
                 ..Default::default()
             };
             
@@ -446,9 +448,11 @@ impl eframe::App for ZipToolApp {
         // 第一次运行时加载字体
         if !self.fonts_loaded {
             let mut fonts = egui::FontDefinitions::default();
-            let font_path = Path::new("assets/SourceHanSerif-VF.otf.ttc");
-            if let Ok(data) = fs::read(font_path) {
-                let font_data = egui::FontData::from_owned(data);
+            // 嵌入字体文件到可执行文件
+            let font_data = include_bytes!("../assets/SourceHanSerif-VF.otf.ttc");
+            let mut buffer = Vec::new();
+            if let Ok(_) = std::io::Cursor::new(font_data).read_to_end(&mut buffer) {
+                let font_data = egui::FontData::from_owned(buffer);
                 fonts.font_data.insert("source-han-serif".to_owned(), font_data);
                 fonts.families.get_mut(&egui::FontFamily::Proportional).unwrap()
                     .insert(0, "source-han-serif".to_owned());
@@ -732,8 +736,6 @@ impl ZipToolApp {
         self.result_receiver = Some(rx);
     }
 }
-use std::thread;
-
 // 加载应用图标
 fn load_icon_data() -> Option<eframe::IconData> {
     let icon_path = std::path::PathBuf::from(std::env::current_exe().unwrap_or_default())
