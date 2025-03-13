@@ -1,0 +1,16 @@
+/target
+**/*.rs.bk
+**/*.pdb
+**/*.exe
+Cargo.lock
+.DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
+*.zip
+
+# 测试文件
+debug_gui.rs
+run_with_error.bat
+test_dir/
