@@ -1,4 +1,4 @@
-# Zip Tool - 高效的Rust解压缩工具
+# Zip Tool - 高效的Rust解压缩工具(zbd)
 
 ## 克隆项目
 
