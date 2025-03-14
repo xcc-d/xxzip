@@ -3,7 +3,6 @@ name = "zip_tool"
 version = "0.1.0"
 edition = "2021"
 description = "一个高效的Rust解压缩工具，支持GUI和命令行界面"
-authors = ["Your Name <your.email@example.com>"]
 repository = "https://github.com/xcc-d/xxzip.git"
 license = "MIT"
 readme = "README.md"
