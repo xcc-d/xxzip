@@ -19,6 +19,9 @@ chrono = "0.4"
 rfd = "0.11"
 image = { version = "0.24", default-features = false, features = ["png", "jpeg"] }
 atty = "0.2"
+lazy_static = "1.4.0"
+log = "0.4"
+simplelog = "0.12"
 
 [features]
 default = ["gui"]
@@ -40,3 +43,12 @@ lto = true
 codegen-units = 1
 strip = true
 panic = "abort"
+
+[build-dependencies]
+winres = "0.1.12"
+
+[target.'cfg(windows)'.build-dependencies]
+winres = "0.1.12"
+
+[target.'cfg(windows)'.rustflags]
+rustflags = ["-C", "target-feature=+crt-static", "-C", "link-args=/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup"]
