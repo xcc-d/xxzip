@@ -4,7 +4,7 @@ use std::path::Path;
 use std::sync::Mutex;
 use std::time::SystemTime;
 use chrono::{DateTime, Local};
-
+//1
 // 全局日志文件句柄
 lazy_static::lazy_static! {
     static ref LOG_FILE: Mutex<Option<File>> = Mutex::new(None);

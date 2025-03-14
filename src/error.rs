@@ -3,6 +3,7 @@ use std::io;
 use std::path::StripPrefixError;
 use std::string::FromUtf8Error;
 
+// 1
 #[derive(Debug)]
 pub enum ZipError {
     Io(io::Error),

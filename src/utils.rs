@@ -1,15 +1,7 @@
 use std::path::Path;
 use indicatif::{ProgressBar, ProgressStyle};
+//1
 
-/// Creates a progress bar with a consistent style
-/// 
-/// # Arguments
-/// 
-/// * `total_size` - The total size for the progress bar
-/// 
-/// # Returns
-/// 
-/// * `ProgressBar` - A configured progress bar
 pub fn create_progress_bar(total_size: u64) -> ProgressBar {
     let progress = ProgressBar::new(total_size);
     progress.set_style(
